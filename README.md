@@ -11,3 +11,7 @@ API de login da roxinha 💜
 ```bash
   npm start
 ```
+
+## 🔐 Credenciais
+Email: admin
+Senha: 1234
