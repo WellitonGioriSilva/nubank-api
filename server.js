@@ -1,0 +1,45 @@
+const express = require("express");
+const jwt = require("jsonwebtoken");
+
+const authMiddleware = require("./src/authMiddleware");
+
+const app = express();
+app.use(express.json());
+
+const SECRET = "chave_segura_api";
+
+// Mock
+const mockUser = {
+  username: "admin",
+  password: "1234"
+};
+
+app.get("/", (req, res) => {
+  res.send("API de Autenticação com JWT");
+});
+
+// POST /login
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  if (username === mockUser.username && password === mockUser.password) {
+    const token = jwt.sign({ username }, SECRET, { expiresIn: "1h" });
+
+    return res.json({
+      message: "Login realizado com sucesso",
+      token
+    });
+  }
+
+  return res.status(401).json({ error: "Credenciais inválidas" });
+});
+
+// Rota protegida
+app.get("/private", authMiddleware(SECRET), (req, res) => {
+  res.json({
+    message: "Acesso permitido",
+    user: req.user
+  });
+});
+
+app.listen(3000, () => console.log("Servidor rodando na porta 3000"));
