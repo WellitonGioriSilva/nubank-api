@@ -13,5 +13,5 @@ API de login da roxinha 💜
 ```
 
 ## 🔐 Credenciais
-Login: admin \
+Email: admin@email.com \
 Senha: 1234
