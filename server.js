@@ -5,6 +5,7 @@ const authMiddleware = require("./src/autenticacao");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const SECRET = "chave_segura_api";
 
