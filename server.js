@@ -10,7 +10,7 @@ const SECRET = "chave_segura_api";
 
 // Mock
 const mockUser = {
-  username: "admin",
+  email: "admin@email.com",
   password: "1234"
 };
 
@@ -20,10 +20,10 @@ app.get("/", (req, res) => {
 
 // POST /login
 app.post("/login", (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (username === mockUser.username && password === mockUser.password) {
-    const token = jwt.sign({ username }, SECRET, { expiresIn: "1h" });
+  if (email === mockUser.email && password === mockUser.password) {
+    const token = jwt.sign({ email }, SECRET, { expiresIn: "1h" });
 
     return res.json({
       message: "Login realizado com sucesso",
